@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- <script src="<https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js>"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <title>Vue App</title>
+</head>
+<body>
+
+
+    <p>{{alldistrict}}</p>
+
+<div id="app-7">
+    <p v-for="district in districts">
+        [[ district.church_assembly_location ]]
+    </p>
+</div>
+
+
+
+
+<script>
+    var app7 = new Vue({
+        el: '#app-7',
+        data: {
+            districts: [],
+        },
+        mounted: function() {
+            var self = this;
+            axios.get('/api/districts')
+                .then(function(response) {
+                    self.districts = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error)
+                });
+        }
+    });
+</script>
+   
+</body>
+</html>
